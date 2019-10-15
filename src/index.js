@@ -39,6 +39,8 @@ module.exports = ({ types: t }, { removeEmptyText = true } = {}) => {
     return children.map(child => {
       if (t.isJSXExpressionContainer(child)) {
         return child.expression;
+      } else if (t.isJSXSpreadChild(child)) {
+        return t.spreadElement(child.expression);
       }
       return child;
     });
