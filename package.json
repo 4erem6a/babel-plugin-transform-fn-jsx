@@ -1,0 +1,11 @@
+{
+  "name": "babel-plugin-transform-functional-jsx",
+  "version": "0.0.1",
+  "description": "Transforms JSX into js function calls",
+  "main": "src/index.js",
+  "author": "4erem6a",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.2.0"
+  }
+}
