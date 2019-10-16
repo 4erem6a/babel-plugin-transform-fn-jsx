@@ -1,4 +1,4 @@
-# babel-plugin-transform-functional-jsx
+# babel-plugin-transform-fn-jsx
 
 Transforms JSX into js function calls.
 
@@ -9,7 +9,9 @@ Transforms JSX into js function calls.
 ```jsx
 <text>2 + 2 = {2 + 2}</text>
 ```
+
 is
+
 ```js
 text({}, ["2 + 2 = ", 2 + 2]);
 ```
@@ -21,29 +23,27 @@ text({}, ["2 + 2 = ", 2 + 2]);
   <ns:another />
 </ns:element>
 ```
+
 is
+
 ```js
-ns("element", {}, [
-  ns("another", {}, [])
-])
+ns("element", {}, [ns("another", {}, [])]);
 ```
 
 ### Fragments
 
 ```jsx
 <>
-  <element/>
-  <element/>
-  <element/>
+  <element />
+  <element />
+  <element />
 </>
 ```
+
 is
+
 ```js
-[
-  element({}, []),
-  element({}, []),
-  element({}, [])
-]
+[element({}, []), element({}, []), element({}, [])];
 ```
 
 ## Options
@@ -52,28 +52,27 @@ is
 Removes blank and empty JSXText elements.
 
 Example:
+
 ```jsx
 // JSX
-<>
-  <element/>
-  <element/>
-  <element/>
-</>
-// Compiled JS
-// removeEmptyText: true
-[
-  element({}, []),
-  element({}, []),
-  element({}, [])
-]
-// removeEmptyText: false
-[
-  "\n\t",
+(
+  <>
+    <element />
+    <element />
+    <element />
+  </>
+)[
+  // Compiled JS
+  // removeEmptyText: true
+  (element({}, []), element({}, []), element({}, []))
+][
+  // removeEmptyText: false
+  ("\n\t",
   element({}, []),
   "\n\t",
   element({}, []),
   "\n\t",
   element({}, []),
-  "\n"
-]
+  "\n")
+];
 ```

@@ -59,7 +59,7 @@ module.exports = ({ types: t }, { removeEmptyText = true } = {}) => {
   }
 
   return {
-    name: "babel-plugin-transform-functional-jsx",
+    name: "babel-plugin-transform-fn-jsx",
     inherits: require("@babel/plugin-syntax-jsx").default,
     visitor: {
       JSXText: {
