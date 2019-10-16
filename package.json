@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-fn-jsx",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Transforms JSX into js function calls",
   "main": "src/index.js",
   "author": "4erem6a",
