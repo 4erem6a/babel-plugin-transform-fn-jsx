@@ -1,10 +1,12 @@
 module.exports = ({ types: t }, { removeEmptyText = true } = {}) => {
+  function stringifyJSXIdentifier(name) {
+    return name
+      .replace(/-([a-z])/g, (match, letter) => letter.toUpperCase())
+      .replace(/-/g, "");
+  }
+
   function transformJSXIdentifier({ name }) {
-    return t.identifier(
-      name
-        .replace(/-([a-z])/g, (match, letter) => letter.toUpperCase())
-        .replace(/-/g, "")
-    );
+    return t.identifier(stringifyJSXIdentifier(name));
   }
 
   function transformAttributeValue(value) {
@@ -23,8 +25,8 @@ module.exports = ({ types: t }, { removeEmptyText = true } = {}) => {
         properties.push(t.spreadElement(attr.argument));
       } else {
         const key = attr.name.name.includes(":")
-          ? t.stringLiteral(attr.name.name)
-          : t.identifier(attr.name.name);
+          ? t.stringLiteral(stringifyJSXIdentifier(attr.name.name))
+          : transformJSXIdentifier(attr.name);
 
         properties.push(
           t.objectProperty(key, transformAttributeValue(attr.value))
@@ -96,7 +98,7 @@ module.exports = ({ types: t }, { removeEmptyText = true } = {}) => {
           if (t.isJSXNamespacedName(name)) {
             path.replaceWith(
               t.callExpression(transformJSXIdentifier(name.namespace), [
-                t.stringLiteral(transformJSXIdentifier(name.name).name),
+                t.stringLiteral(stringifyJSXIdentifier(name.name.name)),
                 buildAttributesObject(attributes),
                 t.arrayExpression(children)
               ])
