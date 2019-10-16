@@ -78,7 +78,7 @@ module.exports = ({ types: t }, { removeEmptyText = true } = {}) => {
         exit(path) {
           const { children } = path.node;
 
-          path.replaceWith(t.arrayExpression(children));
+          path.replaceWith(t.arrayExpression(transformChildren(children)));
         }
       },
       JSXAttribute: {
@@ -100,7 +100,7 @@ module.exports = ({ types: t }, { removeEmptyText = true } = {}) => {
               t.callExpression(transformJSXIdentifier(name.namespace), [
                 t.stringLiteral(stringifyJSXIdentifier(name.name.name)),
                 buildAttributesObject(attributes),
-                t.arrayExpression(children)
+                t.arrayExpression(transformChildren(children))
               ])
             );
           } else {
