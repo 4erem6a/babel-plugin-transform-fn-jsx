@@ -1,5 +1,7 @@
 # babel-plugin-transform-fn-jsx
 
+[![npm version](https://badge.fury.io/js/babel-plugin-transform-fn-jsx.svg)](https://www.npmjs.com/package/babel-plugin-transform-fn-jsx)
+
 Transforms JSX into js function calls.
 
 ## Examples
